@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  </head>
+  <body>
+    <div style="width: 100%; text-align: center;">
+      <img src="https://hcb-storage.s3.amazonaws.com/honeycomb/full_size_logo_white.png" width="300">
+      <br /><br />
+      <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+      <br /><br />
+      <p>Please close the browser</p>
+    </div>
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionID = urlParams.get("sessionID");
+      const status = urlParams.get("status");
+      if (sessionID) {
+        const key = urlParams.get("key");
+        var stripe = Stripe(key);
+        stripe
+          .redirectToCheckout({
+            sessionId: sessionID
+          })
+          .then(function(result) {
+            // If `redirectToCheckout` fails due to a browser or network
+            // error, display the localized error message to your customer
+            // using `result.error.message`.
+          });
+      }
+
+      if (status) {
+        if (status == "close") {
+          window.close();
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+h1,
+h2,
+p {
+  font-family: Lato;
+}
+
+body,
+html {
+  background: #2d4557;
+  color: white;
+}
